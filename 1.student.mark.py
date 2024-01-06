@@ -44,6 +44,25 @@ def show_student_marks(students, selected_course):
    for student_id, student_info in students.items():
        print(f"Student {student_id}: {student_info['marks'].get(selected_course, 'Not enrolled')}")
 
+# def menu_selector(menu_selector):
+#    if menu_selector == 0:
+#       print("Exitting program")
+#       return 0
+       
+def menu_selector(menu_selector):
+   match menu_selector:
+      case 0:
+         print("Exitting program...")
+      case 1:
+         return input_num_students
+      case 2:
+         return input_student_info
+      
+
+      case _:
+         print("Invalid option!")
+      
+
 def main():
    num_students = input_num_students()
    students = input_student_info(num_students)
@@ -54,6 +73,8 @@ def main():
    list_courses(courses)
    list_students(students)
    show_student_marks(students, selected_course)
+
+   
 
 if __name__ == "__main__":
    main()
