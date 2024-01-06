@@ -49,30 +49,63 @@ def show_student_marks(students, selected_course):
 #       print("Exitting program")
 #       return 0
        
-def menu_selector(menu_selector):
-   match menu_selector:
-      case 0:
-         print("Exitting program...")
-      case 1:
-         return input_num_students
-      case 2:
-         return input_student_info
-      
-
-      case _:
-         print("Invalid option!")
-      
+   
 
 def main():
-   num_students = input_num_students()
-   students = input_student_info(num_students)
-   num_courses = input_num_courses()
-   courses = input_course_info(num_courses)
-   selected_course = select_course(courses)
-   input_student_marks(students, selected_course)
-   list_courses(courses)
-   list_students(students)
-   show_student_marks(students, selected_course)
+   # num_students = input_num_students()
+   # students = input_student_info(num_students)
+   # num_courses = input_num_courses()
+   # courses = input_course_info(num_courses)
+   # selected_course = select_course(courses)
+   # input_student_marks(students, selected_course)
+   # list_courses(courses)
+   # list_students(students)
+   # show_student_marks(students, selected_course)
+   # print_menu = "-----------MENU----------- \n0)Exit program \n1)Input number of students \n2)Input student info \n3)Input number of courses \n4)Input course info \n5)Input student marks "
+   # print(print_menu)
+   # menu_selector = int(input("You chose? "))
+
+   # if type(int(menu_selector)) != int:
+   #    print("Invalid selection. Only Integers allowed!")
+   # else:
+   #    int(menu_selector)
+      
+
+   while True:
+      print_menu = "-----------MENU----------- \n0)Exit program \n1)Input number of students \n2)Input student info \n3)Input number of courses \n4)Input course info \n5)Input student marks "
+      print(print_menu)
+      try:
+         menu_selector = int(input("You chose? ")) 
+         pass
+      except ValueError:
+         print("Integer or else....\n")
+         continue
+
+
+      match menu_selector:
+         case 0:
+            print("Exitting program...")
+            break
+         case 1:
+            num_students = input_num_students()
+         case 2:
+            students = input_student_info(num_students)
+         case 3:
+            num_courses = input_num_courses()
+         case 4:
+            courses = input_course_info(num_courses)
+         case 5:
+            selected_course = select_course(courses)
+            input_student_marks(students, selected_course)
+         case 6:
+            list_courses(courses)
+         case 7:
+            list_students(students)
+         case 8:
+            show_student_marks(students, selected_course)
+         case _:
+            print("Invalid option!")
+            continue
 
    
 
