@@ -42,37 +42,11 @@ def list_students(students):
 def show_student_marks(students, selected_course):
    print(f"Marks for course {selected_course}:")
    for student_id, student_info in students.items():
-       print(f"Student {student_id}: {student_info['marks'].get(selected_course, 'Not enrolled')}")
-
-# def menu_selector(menu_selector):
-#    if menu_selector == 0:
-#       print("Exitting program")
-#       return 0
-       
-   
+       print(f"Student {student_id}: {student_info['marks'].get(selected_course, 'Not enrolled')}") 
 
 def main():
-   # num_students = input_num_students()
-   # students = input_student_info(num_students)
-   # num_courses = input_num_courses()
-   # courses = input_course_info(num_courses)
-   # selected_course = select_course(courses)
-   # input_student_marks(students, selected_course)
-   # list_courses(courses)
-   # list_students(students)
-   # show_student_marks(students, selected_course)
-   # print_menu = "-----------MENU----------- \n0)Exit program \n1)Input number of students \n2)Input student info \n3)Input number of courses \n4)Input course info \n5)Input student marks "
-   # print(print_menu)
-   # menu_selector = int(input("You chose? "))
-
-   # if type(int(menu_selector)) != int:
-   #    print("Invalid selection. Only Integers allowed!")
-   # else:
-   #    int(menu_selector)
-      
-
    while True:
-      print_menu = "-----------MENU----------- \n0)Exit program \n1)Input number of students \n2)Input student info \n3)Input number of courses \n4)Input course info \n5)Input student marks "
+      print_menu = "-----------MENU----------- \n0)Exit program \n1)Input student(s) info \n2)Input course(s) info \n3)Input student marks \n4)List courses \n5)List students \n6)List student marks"
       print(print_menu)
       try:
          menu_selector = int(input("You chose? ")) 
@@ -81,33 +55,51 @@ def main():
          print("Integer or else....\n")
          continue
 
-
       match menu_selector:
          case 0:
             print("Exitting program...")
             break
          case 1:
             num_students = input_num_students()
-         case 2:
             students = input_student_info(num_students)
-         case 3:
+         case 2:
             num_courses = input_num_courses()
-         case 4:
             courses = input_course_info(num_courses)
+         case 3:
+            if 'courses' not in locals():
+               print("There are no courses in the database!")
+               continue
+            elif 'students' not in locals():
+               print("There are no students in the database!")
+               continue
+            else:
+               selected_course = select_course(courses)
+               input_student_marks(students, selected_course)
+         case 4:
+            if 'courses' not in locals():
+               print("There are no courses in the database!")
+               continue
+            else:
+               list_courses(courses)
          case 5:
-            selected_course = select_course(courses)
-            input_student_marks(students, selected_course)
+            if 'students' not in locals():
+               print("There are no courses in the database!")
+               continue
+            else:
+               list_students(students)
          case 6:
-            list_courses(courses)
-         case 7:
-            list_students(students)
-         case 8:
             show_student_marks(students, selected_course)
+            if 'selected_course' not in locals():
+               print("Student(s) marks are not yet inputted!")
+               continue
+            if 'students' not in locals():
+               print("There are no students in the database!")
+               continue
+            else:
+               show_student_marks(students, selected_course)
          case _:
             print("Invalid option!")
             continue
-
-   
 
 if __name__ == "__main__":
    main()
