@@ -3,8 +3,8 @@ import numpy
 
 
 class Student:
-    def __init__(self, id, name, dob):
-        self.__id = id
+    def __init__(self, sid, name, dob):
+        self.__id = sid
         self.__name = name
         self.__dob = dob
         self.__marks = {}
@@ -21,7 +21,7 @@ class Student:
     def getdob(self):
         return self.__dob
 
-    def getmarks(self):
+    def getmark(self):
         return self.__marks
 
 
@@ -70,8 +70,8 @@ class School:
         __selected_course = input("Select a course ID: ")
         for student in self.__students:
             try:
-                marks = round(float(input(
-                    f"Enter marks for student {student.getid()} in course {__selected_course}: ")), 1)
+                marks = round(
+                    float(input(f"Enter marks for student {student.getid()} in course {__selected_course}: ")), 1)
                 student.add_mark(__selected_course, marks)
                 pass
             except ValueError:
@@ -91,8 +91,7 @@ class School:
     def list_students(self):
         print("Students:")
         for student in self.__students:
-            print(
-                f"ID: {student.getid()}, Name: {student.getname()}, DoB: {student.getdob()}")
+            print(f"ID: {student.getid()}, Name: {student.getname()}, DoB: {student.getdob()}")
 
     def show_student_marks(self):
         if not self.__courses or not self.__students:
@@ -100,8 +99,7 @@ class School:
         __selected_course = input("Select a course ID: ")
         print(f"Marks for course {__selected_course}:")
         for student in self.__students:
-            print(
-                f"Student {student.getid()}: {student.getmarks().get(__selected_course, 'Not enrolled')}")
+            print(f"Student {student.getid()}: {student.getmark().get(__selected_course, 'Not enrolled')}")
 
     def show_student_gpas(self):
         if not self.__courses or not self.__students:
