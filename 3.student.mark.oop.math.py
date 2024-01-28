@@ -79,10 +79,10 @@ class School:
                 continue
 
     def calculate_average_gpa(student):
-        marks = numpy.array(list(student.getmark(student).values()))
-        print(marks)    # Testing
-        gpa = numpy.mean(marks)
-        return gpa
+        __credit = numpy.array([3, 4])
+        __marks = numpy.array(list(student.getmark().values()))
+        __gpa = numpy.average(__marks, weights = __credit)
+        return __gpa
 
     def list_courses(self):
         print("Courses:")
@@ -105,10 +105,8 @@ class School:
     def show_student_gpas(self):
         if not self.__courses or not self.__students:
             return
-        __selected_course = input("Select a course ID: ")
-        print(f"Marks for course {__selected_course}:")
         for student in self.__students:
-            print(f"Student {student.getid()}: {School.calculate_average_gpa}")
+            print(f"Student {student.getid()}: {School.calculate_average_gpa(student)}")
 
 
 def main():
