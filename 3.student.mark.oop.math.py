@@ -79,7 +79,8 @@ class School:
                 continue
 
     def calculate_average_gpa(student):
-        marks = numpy.array(list(student.getmarks().values()))
+        marks = numpy.array(list(student.getmark(student).values()))
+        print(marks)    # Testing
         gpa = numpy.mean(marks)
         return gpa
 
