@@ -1,6 +1,5 @@
 import numpy
-from domains import Course, Student
-
+from . import Course, Student
 
 class School:
     __students = []
@@ -22,7 +21,9 @@ class School:
     def add_course(self, course):
         self.__courses.append(course)
 
-    def calculate_average_gpa(student):
-        marks = numpy.array(list(student.getmark(student).values()))
-        gpa = numpy.mean(marks)
-        return gpa
+    def calculate_average_gpa(self, student: Student):
+        __credit = numpy.array([3, 4])
+        __marks = numpy.array(list(student.getmark().values()))
+        __gpa = numpy.average(__marks, weights=__credit)
+        student.setgpa(__gpa)
+        return __gpa
