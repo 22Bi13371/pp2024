@@ -19,11 +19,11 @@ def input_course_info(school):
 
 
 def input_student_marks(school):
-    if not school.__courses:
+    if not school.getcourses():
         print("There are no courses in the database!")
         return
     __selected_course = input("Select a course ID: ")
-    for student in school.__students:
+    for student in school.getstudents():
         try:
             marks = round(
                 float(input(f"Enter marks for student {student.getid()} in course {__selected_course}: ")), 1)
