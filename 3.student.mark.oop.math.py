@@ -5,6 +5,7 @@ import curses
 
 class Student:
     __gpa = 0
+
     def __init__(self, sid, name, dob):
         self.__id = sid
         self.__name = name
@@ -89,7 +90,7 @@ class School:
     def calculate_average_gpa(student):
         __credit = numpy.array([3, 4])
         __marks = numpy.array(list(student.getmark().values()))
-        __gpa = numpy.average(__marks, weights = __credit)
+        __gpa = numpy.average(__marks, weights=__credit)
         student.setgpa(__gpa)
         return __gpa
 
@@ -101,7 +102,8 @@ class School:
     def list_students(self):
         print("Students:")
         for student in self.__students:
-            print(f"ID: {student.getid()}, Name: {student.getname()}, DoB: {student.getdob()}")
+            print(
+                f"ID: {student.getid()}, Name: {student.getname()}, DoB: {student.getdob()}")
 
     def show_student_marks(self):
         if not self.__courses or not self.__students:
@@ -109,16 +111,19 @@ class School:
         __selected_course = input("Select a course ID: ")
         print(f"Marks for course {__selected_course}:")
         for student in self.__students:
-            print(f"Student {student.getid()}: {student.getmark().get(__selected_course, 'Not enrolled')}")
+            print(
+                f"Student {student.getid()}: {student.getmark().get(__selected_course, 'Not enrolled')}")
 
     def show_student_gpas(self):
         if not self.__courses or not self.__students:
             return
 
         for student in self.__students:
-            print(f"Student {student.getid()}: {School.calculate_average_gpa(student)}")
+            print(
+                f"Student {student.getid()}: {School.calculate_average_gpa(student)}")
 
-        gpas = {student.getid(): School.calculate_average_gpa(student) for student in self.__students}
+        gpas = {student.getid(): School.calculate_average_gpa(student)
+                for student in self.__students}
         sorted_gpas = sorted(gpas.items(), key=lambda x: x[1], reverse=True)
         print("\nGPA from highest to lowest:")
         for student_id, gpa in sorted_gpas:
@@ -159,7 +164,6 @@ def main():
                 print("Invalid option!")
                 continue
 
+
 if __name__ == "__main__":
     main()
-
-

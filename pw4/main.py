@@ -1,8 +1,10 @@
 from domains import *
+import output
+import inputs
 
 
 def main():
-    school = School()
+    school = School.School()
     while True:
         print_menu = "-----------MENU----------- \n0)Exit program \n1)Input student(s) info \n2)Input course(s) info \n3)Input student marks \n4)List courses \n5)List students \n6)List student marks \n7)List student GPAs"
         print(print_menu)
@@ -18,19 +20,19 @@ def main():
                 print("Exitting program...")
                 break
             case 1:
-                school.input_student_info()
+                inputs.input_student_info(school)
             case 2:
-                school.input_course_info()
+                inputs.input_course_info(school)
             case 3:
-                school.input_student_marks()
+                inputs.input_student_marks(school)
             case 4:
-                school.list_courses()
+                output.list_courses(school)
             case 5:
-                school.list_students()
+                output.list_students(school)
             case 6:
-                school.show_student_marks()
+                output.show_student_marks(school)
             case 7:
-                school.show_student_gpas()
+                output.show_student_gpas(school)
             case _:
                 print("Invalid option!")
                 continue

@@ -1,3 +1,6 @@
 .prettierrc
 .vscode/settings.json
 /data.txt
+pw4/domains/__pycache__
+pw4/__pycache__
+
