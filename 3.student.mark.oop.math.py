@@ -1,13 +1,18 @@
 import math
 import numpy
+import curses
 
 
 class Student:
+    __gpa = 0
     def __init__(self, sid, name, dob):
         self.__id = sid
         self.__name = name
         self.__dob = dob
         self.__marks = {}
+
+    def setgpa(self, gpa):
+        self.__gpa = gpa
 
     def add_mark(self, course_id, mark):
         self.__marks[course_id] = mark
@@ -23,6 +28,9 @@ class Student:
 
     def getmark(self):
         return self.__marks
+
+    def getgpa(self):
+        return self.__gpa
 
 
 class Course:
@@ -79,10 +87,11 @@ class School:
                 continue
 
     def calculate_average_gpa(student):
-        marks = numpy.array(list(student.getmark(student).values()))
-        print(marks)    # Testing
-        gpa = numpy.mean(marks)
-        return gpa
+        __credit = numpy.array([3, 4])
+        __marks = numpy.array(list(student.getmark().values()))
+        __gpa = numpy.average(__marks, weights = __credit)
+        student.setgpa(__gpa)
+        return __gpa
 
     def list_courses(self):
         print("Courses:")
@@ -105,10 +114,15 @@ class School:
     def show_student_gpas(self):
         if not self.__courses or not self.__students:
             return
-        __selected_course = input("Select a course ID: ")
-        print(f"Marks for course {__selected_course}:")
+
         for student in self.__students:
-            print(f"Student {student.getid()}: {School.calculate_average_gpa}")
+            print(f"Student {student.getid()}: {School.calculate_average_gpa(student)}")
+
+        gpas = {student.getid(): School.calculate_average_gpa(student) for student in self.__students}
+        sorted_gpas = sorted(gpas.items(), key=lambda x: x[1], reverse=True)
+        print("\nGPA from highest to lowest:")
+        for student_id, gpa in sorted_gpas:
+            print(f"Student {student_id}: {gpa}")
 
 
 def main():
@@ -145,6 +159,7 @@ def main():
                 print("Invalid option!")
                 continue
 
-
 if __name__ == "__main__":
     main()
+
+
