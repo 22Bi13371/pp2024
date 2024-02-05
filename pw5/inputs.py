@@ -4,7 +4,7 @@ import pathlib as path
 
 def input_student_info(school):
     __num_students = int(input("Enter the number of students: "))
-    filename = 'pw5/data/students.txt'
+    filename = './data/students.txt'
 
     for _ in range(__num_students):
         id = input("Enter student ID: ")
@@ -22,7 +22,7 @@ def input_student_info(school):
 
 def input_course_info(school):
     __num_courses = int(input("Enter the number of courses: "))
-    filename = "pw5/data/courses.txt"
+    filename = "./data/courses.txt"
     for _ in range(__num_courses):
         id = input("Enter course ID: ")
         name = input("Enter course name: ")
@@ -37,7 +37,7 @@ def input_course_info(school):
 
 
 def input_student_marks(school):
-    filename = "pw5/data/marks.txt"
+    filename = "./data/marks.txt"
 
     if not school.getcourses():
         print("There are no courses in the database!")
@@ -54,7 +54,7 @@ def input_student_marks(school):
             print("Float or else....\n")
             continue
 
-        studentmark = f"{student.getid()}/n{marks}/n"
+        studentmark = f"{student.getid()}\n{marks}\n"
 
         try:
             with open(filename, 'a+') as f:

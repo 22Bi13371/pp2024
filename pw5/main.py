@@ -1,10 +1,14 @@
 from domains import *
 import output
 import inputs
+from Utilities import *
+
 
 
 def main():
     school = School.School()
+    compression.decompress()
+
     while True:
         print_menu = "-----------MENU----------- \n0)Exit program \n1)Input student(s) info \n2)Input course(s) info \n3)Input student marks \n4)List courses \n5)List students \n6)List student marks \n7)List student GPAs"
         print(print_menu)
@@ -18,6 +22,7 @@ def main():
         match menu_selector:
             case 0:
                 print("Exitting program...")
+                compression.compress()
                 break
             case 1:
                 inputs.input_student_info(school)
