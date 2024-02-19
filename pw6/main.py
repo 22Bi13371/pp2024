@@ -6,7 +6,10 @@ from Utilities import *
 
 def main():
     school = School.School()
-    compression.decompress()
+    # compression.decompress()
+    # compression.loadData(school)
+    pickletool.loadData(school)
+
 
     while True:
         print_menu = "-----------MENU----------- \n0)Exit program \n1)Input student(s) info \n2)Input course(s) info \n3)Input student marks \n4)List courses \n5)List students \n6)List student marks \n7)List student GPAs \n8)Remove student files"
@@ -21,7 +24,8 @@ def main():
         match menu_selector:
             case 0:
                 print("Exitting program...")
-                compression.compress()
+                # compression.compress()
+                pickletool.storeData(school)
                 break
             case 1:
                 inputs.input_student_info(school)

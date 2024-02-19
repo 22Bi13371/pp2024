@@ -1,1 +1,1 @@
-__all__ = ['compression']
+__all__ = ['compression', 'pickletool']

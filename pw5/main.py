@@ -7,6 +7,7 @@ from Utilities import *
 def main():
     school = School.School()
     compression.decompress()
+    compression.loadData(school)
 
     while True:
         print_menu = "-----------MENU----------- \n0)Exit program \n1)Input student(s) info \n2)Input course(s) info \n3)Input student marks \n4)List courses \n5)List students \n6)List student marks \n7)List student GPAs \n8)Remove student files"

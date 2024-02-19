@@ -54,7 +54,7 @@ def input_student_marks(school):
             print("Float or else....\n")
             continue
 
-        studentmark = f"{student.getid()}\n{marks}\n"
+        studentmark = f"{student.getid()}\n{marks}\n{__selected_course}\n"
 
         try:
             with open(filename, 'a+') as f:
