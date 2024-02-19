@@ -2,15 +2,24 @@ from pathlib import Path
 import pickle
 from domains import *
 
-files = ["courses.txt", "marks.txt", "students.txt"]
+files = []
+filename = "./data/Student.json"
+
 
 def storeData(school):
-    with open(".data/Database.json", "a+b") as file:
-        pickle.dump(school, file)
-
-def loadData(school):
     try:
-        with open(".data/Database.json", "rb") as file:
-            school = pickle.load(file)
+        with open(filename,'wb') as file:
+            pickle.dump(school, file)
+    except IOError:
+        print("Error! File not found")
+
+
+def loadData():
+    try:
+        if Path(filename).exists():
+            with open(filename, "rb") as file:
+                return pickle.load(file)
+        else:
+            return School.School()
     except FileNotFoundError:
         print("No Database.json can be found!")

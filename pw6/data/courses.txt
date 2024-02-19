@@ -1,4 +1,0 @@
-1
-course1
-2
-course2

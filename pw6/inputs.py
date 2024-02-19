@@ -13,11 +13,11 @@ def input_student_info(school):
         school.add_student(Student.Student(id, name, dob))
         studentinfo = f"{id}\n{name}\n{dob}\n"
 
-        try:
-            with open(filename, 'a+') as f:
-                f.write(studentinfo)
-        except IOError:
-            print(f"Something happened with {filename}")
+        # try:
+        #     with open(filename, 'a+') as f:
+        #         f.write(studentinfo)
+        # except IOError:
+        #     print(f"Something happened with {filename}")
 
 
 def input_course_info(school):
@@ -29,11 +29,11 @@ def input_course_info(school):
         school.add_course(Course.Course(id, name))
         courseinfo = f"{id}\n{name}\n"
 
-        try:
-            with open(filename, 'a+') as f:
-                f.write(courseinfo)
-        except IOError:
-            print(f"Something happened with {filename}")
+        # try:
+        #     with open(filename, 'a+') as f:
+        #         f.write(courseinfo)
+        # except IOError:
+        #     print(f"Something happened with {filename}")
 
 
 def input_student_marks(school):
@@ -56,8 +56,8 @@ def input_student_marks(school):
 
         studentmark = f"{student.getid()}\n{marks}\n{__selected_course}\n"
 
-        try:
-            with open(filename, 'a+') as f:
-                f.write(studentmark)
-        except IOError:
-            print(f"Something happened with {filename}")
+        # try:
+        #     with open(filename, 'a+') as f:
+        #         f.write(studentmark)
+        # except IOError:
+        #     print(f"Something happened with {filename}")

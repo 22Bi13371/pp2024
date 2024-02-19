@@ -3,7 +3,7 @@ import gzip
 from pathlib import Path
 from domains import Course, Student
 
-files = ["courses.txt", "marks.txt", "students.txt"]
+files = ["Student.json"]
 
 
 def validate_files(filelist):
@@ -40,7 +40,7 @@ def loadData(school):
 
 def remove_data():
     files_present = validate_files(files)
-    if len(files_present) == 3:
+    if len(files_present) == 1:
         for file in files_present:
             file_to_remove = Path(f"./data/{file}")
             file_to_remove.unlink()
@@ -50,7 +50,7 @@ def remove_data():
 
 def compress():
     files_present = validate_files(files)
-    if len(files_present) == 3:
+    if len(files_present) == 1:
         with tar.open("./data/students.dat", "w:gz") as studentFile:
             for file in files_present:
                 studentFile.add(f"./data/{file}", arcname=file)
@@ -59,7 +59,7 @@ def compress():
 
 def decompress():
     files_present = validate_files(files)
-    if len(files_present) == 3:
+    if len(files_present) == 1:
         return
     elif Path(f"./data/students.dat").exists():
         with tar.open("./data/students.dat", "r:gz") as studentFile:
