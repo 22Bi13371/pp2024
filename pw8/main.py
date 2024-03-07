@@ -14,8 +14,7 @@ def main():
     load_thread = pickletool.ThreadWithReturnValue(target=pickletool.loadData)
     load_thread.start()
     school = load_thread.join()
-    save_thread = threading.Thread(target=pickletool.storeData, args=(school,))
-    save_thread.start()
+
 
     while True:
         print_menu = "-----------MENU----------- \n0)Exit program \n1)Input student(s) info \n2)Input course(s) info \n3)Input student marks \n4)List courses \n5)List students \n6)List student marks \n7)List student GPAs \n8)Remove student files"
@@ -31,6 +30,8 @@ def main():
             case 0:
                 print("Exitting program...")
                 # pickletool.storeData(school)
+                save_thread = threading.Thread(target=pickletool.storeData, args=(school,))
+                save_thread.start()
                 save_thread.join()
                 compression.compress()
                 break

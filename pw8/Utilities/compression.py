@@ -13,6 +13,7 @@ def validate_files(filelist):
             files_present.append(file)
     return files_present
 
+
 def loadData(school):
     files_present = validate_files(files)
     if len(files_present) == 3:
@@ -38,6 +39,7 @@ def loadData(school):
     else:
         print("There are not enough required files to load!")
 
+
 def remove_data():
     files_present = validate_files(files)
     if len(files_present) == 1:
@@ -45,7 +47,7 @@ def remove_data():
             file_to_remove = Path(f"./data/{file}")
             file_to_remove.unlink()
     else:
-        print(f"There are not enough files(3) to remove!")
+        print(f"There are not enough files(1) to remove!")
 
 
 def compress():
@@ -56,6 +58,7 @@ def compress():
                 studentFile.add(f"./data/{file}", arcname=file)
     else:
         print("You must input all data before compressing!")
+
 
 def decompress():
     files_present = validate_files(files)
