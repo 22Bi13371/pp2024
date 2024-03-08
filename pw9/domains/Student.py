@@ -12,6 +12,7 @@ class Student:
 
     def add_mark(self, course_id, mark):
         self.__marks[course_id] = mark
+        self.__marks.setdefault(course_id, "Not enrolled")
 
     def getid(self):
         return self.__id
