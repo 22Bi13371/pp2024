@@ -19,11 +19,13 @@ class Gui:
         self.tab_course = ttk.Frame(self.notebook)
         self.tab_grade = ttk.Frame(self.notebook)
         self.tab_grade_entry = ttk.Frame(self.notebook)
+        self.tab_gpa = ttk.Frame(self.notebook)
 
         self.notebook.add(self.tab_student, text="Students")
         self.notebook.add(self.tab_course, text="Courses")
         self.notebook.add(self.tab_grade, text="Grades")
         self.notebook.add(self.tab_grade_entry, text="Grades entry")
+        self.notebook.add(self.tab_gpa, text="GPAs")
 
         self.notebook.pack(expand=1, fill="both")
 
@@ -80,8 +82,11 @@ class Gui:
         self.add_button_course = tk.Button(self.tab_course, text="Add", command=lambda: self.add_course_info(school))
         self.add_button_course.grid(row=3, column=0, columnspan=2)
 
-        self.add_button_grade = ttk.Button(self.tab_grade, text="Submit Grades", command= self.create_grade_input)
+        self.add_button_grade = ttk.Button(self.tab_grade, text="Submit Grades", command=self.create_grade_input)
         self.add_button_grade.grid(row=4, column=0, columnspan=2)
+
+        self.show_gpas = tk.Button(self.tab_gpa, text="Show student gpas", command=self.show_student_gpas)
+        self.show_gpas.grid(row=3, column=0, columnspan=2)
 
         # List box to display information
         self.listbox_student = tk.Listbox(self.tab_student, width=100)
@@ -92,6 +97,9 @@ class Gui:
 
         self.listbox_grade = tk.Listbox(self.tab_grade, width=100)
         self.listbox_grade.grid(row=6, column=0, columnspan=2)
+
+        self.listbox_gpa = tk.Listbox(self.tab_gpa, width=100)
+        self.listbox_gpa.grid(row=6, column=0, columnspan=2)
 
         # Check if there are any already existing data and add to list box
         if len(school.getstudents()) > 0:
@@ -109,7 +117,7 @@ class Gui:
             for student in school.getstudents():
                 for course in student.getmark():
                     self.listbox_grade.insert(tk.END, f"Student {student.getid()}, course {course}:"
-                                                       f" {student.getmark().get(course, 'Not enrolled')}")
+                                                      f" {student.getmark().get(course, 'Not enrolled')}")
 
     def add_student_info(self, school: School):
         student_name = self.student_name_entry.get()
@@ -144,9 +152,8 @@ class Gui:
     # populate dropdown menu with courses
     def populate_course_dropdown(self):
         courses = self.school.getcourses()
-        course_ids= [course.getid() for course in courses]
+        course_ids = [course.getid() for course in courses]
         self.course_dropdown['values'] = course_ids
-
 
     def create_grade_input(self):
         for widget in self.tab_grade_entry.winfo_children():
@@ -167,17 +174,36 @@ class Gui:
         # self.add_button_grade_entry.grid(row=4, column=0, columnspan=2)
         self.add_button_grade_entry.pack()
 
-
-
     def submit_grades(self):
         selected_course = self.course_var.get()
         grades = [entry.get() for entry in self.grade_entries]
         for student, grade in zip(self.school.getstudents(), grades):
-            student.add_mark(selected_course, grade)
+            student.add_mark(selected_course, float(grade))
 
             # add entered grades to grade tab
             self.listbox_grade.insert(tk.END, f"Student {student.getid()}, course {selected_course}:"
-                                                       f" {grade}")
+                                              f" {grade}")
+
+    def show_student_gpas(self):
+        self.listbox_gpa.delete(0, tk.END)
+
+        if not self.school.getcourses() or not self.school.getstudents():
+            return
+
+        # print("\nUnsorted:")
+        self.listbox_gpa.insert(tk.END, f"Unsorted:")
+        for student in self.school.getstudents():
+            self.listbox_gpa.insert(tk.END, f"Student {student.getid()}: {self.school.calculate_average_gpa(student)}")
+            # print(f"Student {student.getid()}: {self.school.calculate_average_gpa(student)}")
+
+        gpas = {student.getid(): self.school.calculate_average_gpa(student)
+                for student in self.school.getstudents()}
+        sorted_gpas = sorted(gpas.items(), key=lambda x: x[1], reverse=True)
+        # print("\nGPA from highest to lowest:")
+        self.listbox_gpa.insert(tk.END, "GPA from highest to lowest:")
+        for student_id, gpa in sorted_gpas:
+            self.listbox_gpa.insert(tk.END, f"Student {student_id}: {gpa}")
+            # print(f"Student {student_id}: {gpa}")
 
     def savefile(self):
         save_thread = threading.Thread(target=pickletool.storeData, args=(self.school,))

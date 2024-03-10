@@ -23,7 +23,7 @@ class School:
         self.__courses.append(course)
 
     def calculate_average_gpa(self, student: Student):
-        __credit = numpy.array([3, 4])
+        __credit = numpy.array([3, 4, 5])
         __marks = numpy.array(list(student.getmark().values()))
         __gpa = numpy.average(__marks, weights=__credit)
         student.setgpa(__gpa)
