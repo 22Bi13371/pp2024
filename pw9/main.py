@@ -1,9 +1,10 @@
 from domains import *
-import output
-import inputs
-import threading
+# import output
+# import inputs
+# import threading
 from Utilities import *
 import tkinter as tk
+
 
 def main():
     school = School.School()
@@ -14,7 +15,6 @@ def main():
     load_thread = pickletool.ThreadWithReturnValue(target=pickletool.loadData)
     load_thread.start()
     school = load_thread.join()
-
 
     root = tk.Tk()
     app = Gui.Gui(root, school)
